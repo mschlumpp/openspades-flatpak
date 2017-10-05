@@ -1,0 +1,120 @@
+{
+    "app-id": "jp.yvt.OpenSpades",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.6",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "openspades",
+    "finish-args": [
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--share=network",
+        "--share=ipc",
+        "--device=dri",
+        "--extra-data=nonfree.zip:0927dc323a0b3aba0ee8d1d68d6b544b00fe654740fead6d1faad37aac77a2ad:4036321::https://github.com/yvt/openspades-paks/releases/download/r33/OpenSpadesDevPackage-r33.zip",
+        "--extension=org.freedesktop.Platform.GL=directory=lib/GL",
+        "--persist=.local/share/openspades/"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig"
+    ],
+    "modules": [
+        {
+            "name": "glew",
+            "no-autogen": true,
+            "no-configure": true,
+            "make-install-args": [
+                "GLEW_PREFIX=/app",
+                "GLEW_DEST=/app"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://downloads.sourceforge.net/project/glew/glew/2.0.0/glew-2.0.0.zip",
+                    "sha256": "cc88d2f70a185185eb050eb13789f498425fcd58230bfd65da496b8008f046f2"
+                }
+            ]
+        },
+        {
+            "name": "opus",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://archive.mozilla.org/pub/opus/opus-1.2.tar.gz",
+                    "sha256": "77db45a87b51578fbc49555ef1b10926179861d854eb2613207dc79d9ec0a9a9"
+                }
+            ]
+        },
+        {
+            "name": "opusfile",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://archive.mozilla.org/pub/opus/opusfile-0.7.tar.gz",
+                    "sha256": "9e2bed13bc729058591a0f1cab2505e8cfd8e7ac460bf10a78bcc3b125e7c301"
+                }
+            ]
+        },
+        {
+            "name": "imagemagick",
+            "cleanup": [
+                "/bin",
+                "/etc",
+                "/share",
+                "/lib"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.imagemagick.org/download/ImageMagick.tar.gz",
+                    "sha256": "235537807a8277538b8e968016714e37d9637710d22be6e2c5bcec0e3ac4f23a"
+                }
+            ]
+        },
+        {
+            "name": "openspades",
+            "buildsystem": "cmake",
+            "config-opts": [
+                "-DOPENSPADES_INSTALL_BINARY=bin",
+                "-DOPENSPADES_RESDIR=/app/extra/paks/",
+                "-DCMAKE_CXX_FLAGS=-DGLEW_NO_GLU",
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+            ],
+            "post-install": [
+                "mv /app/share/applications/openspades.desktop /app/share/applications/jp.yvt.OpenSpades.desktop",
+                "mkdir -p /app/share/appdata/",
+                "mv jp.yvt.OpenSpades.appdata.xml /app/share/appdata/jp.yvt.OpenSpades.appdata.xml",
+                "mv apply_extra /app/bin/apply_extra"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/yvt/openspades/archive/v0.1.1c.tar.gz",
+                    "sha256": "e51d6b9422aef149944d7f6a28a284291fb322a025b3fee8bd2cc9da622a73c7"
+                },
+                {
+                    "type": "patch",
+                    "path": "disable-nonfree-download.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "use-xdg-icon-name.patch"
+                },
+                {
+                    "type": "file",
+                    "path": "jp.yvt.OpenSpades.appdata.xml"
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "apply_extra",
+                    "commands": [
+                        "mkdir ./paks/",
+                        "cd ./paks/",
+                        "unzip -j /app/extra/nonfree.zip Nonfree/pak000-Nonfree.pak OfficialMods/font-unifont.pak"
+                    ]
+                }
+            ]
+        }
+    ]
+}

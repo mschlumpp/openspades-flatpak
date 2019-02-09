@@ -1,7 +1,7 @@
 {
     "app-id": "jp.yvt.OpenSpades",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "1.6",
+    "runtime-version": "18.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "openspades",
     "finish-args": [
@@ -41,8 +41,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://archive.mozilla.org/pub/opus/opus-1.2.tar.gz",
-                    "sha256": "77db45a87b51578fbc49555ef1b10926179861d854eb2613207dc79d9ec0a9a9"
+                    "url": "https://archive.mozilla.org/pub/opus/opus-1.3.tar.gz",
+                    "sha256": "4f3d69aefdf2dbaf9825408e452a8a414ffc60494c70633560700398820dc550"
                 }
             ]
         },
@@ -51,8 +51,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://archive.mozilla.org/pub/opus/opusfile-0.7.tar.gz",
-                    "sha256": "9e2bed13bc729058591a0f1cab2505e8cfd8e7ac460bf10a78bcc3b125e7c301"
+                    "url": "https://archive.mozilla.org/pub/opus/opusfile-0.10.tar.gz",
+                    "sha256": "48e03526ba87ef9cf5f1c47b5ebe3aa195bd89b912a57060c36184a6cd19412f"
                 }
             ]
         },
@@ -67,8 +67,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.imagemagick.org/download/ImageMagick.tar.gz",
-                    "sha256": "235537807a8277538b8e968016714e37d9637710d22be6e2c5bcec0e3ac4f23a"
+                    "url": "https://imagemagick.org/download/releases/ImageMagick-7.0.8-26.tar.xz",
+                    "sha256": "04c07773c47f401c321297a42f908c00036ec7f9908adbd667db2b182352a272"
                 }
             ]
         },
@@ -90,8 +90,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/yvt/openspades/archive/v0.1.1c.tar.gz",
-                    "sha256": "e51d6b9422aef149944d7f6a28a284291fb322a025b3fee8bd2cc9da622a73c7"
+                    "url": "https://github.com/yvt/openspades/archive/v0.1.3.tar.gz",
+                    "sha256": "ecd7aaf568f80712d981ecdd7bf9e380221dc2c16e86d2e56a0ddda87432bea3"
                 },
                 {
                     "type": "patch",
